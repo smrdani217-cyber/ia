@@ -1,19 +1,18 @@
-# Terço Virtual — Catequese
-
-Primeira versão simples de um site interativo para acompanhar a oração do terço.
+# Terço Virtual — versão responsiva
 
 ## Como abrir
-1. Extraia o arquivo ZIP.
-2. Abra a pasta `terco-virtual` no Visual Studio Code.
-3. Abra o arquivo `index.html` no navegador. Se tiver a extensão **Live Server**, clique com o botão direito em `index.html` e selecione **Open with Live Server**.
+1. Extraia a pasta `terco-virtual-responsivo`.
+2. Abra a pasta no VS Code.
+3. Abra `index.html` no navegador (ou use a extensão Live Server).
 
 ## Arquivos
-- `index.html`: estrutura das telas.
-- `style.css`: cores, layout e adaptação para celular.
-- `script.js`: rosário clicável, navegação, orações e mistérios.
+- `index.html`: estrutura da página e desenho-base do crucifixo/medalha.
+- `style.css`: aparência e adaptação para computador, tablet e celular.
+- `script.js`: funcionamento original das orações e navegação, com ajuste visual da posição das contas para um terço em formato de V arredondado.
 
-## Observações
-- O projeto não usa banco de dados, cadastro ou instalação.
-- A primeira versão funciona localmente no navegador.
-- Confirme com a catequista a sequência e as versões das orações adotadas pela comunidade antes de apresentar ou utilizar com a turma.
-- A hospedagem online pode ser feita depois, por exemplo, com GitHub Pages.
+O ajuste foi concentrado na geometria SVG e no CSS responsivo.
+
+
+## Ajustes desta versão
+- Sequência inicial: Creio, Pai-Nosso, três Ave-Marias e outro Pai-Nosso, sem Glória ao Pai na abertura.
+- Marcador da Salve-Rainha reposicionado mais abaixo para reduzir a sobreposição com as contas.

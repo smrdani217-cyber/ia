@@ -1,113 +1,543 @@
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root {
   --navy: #102b55;
-  --navy-2: #173d70;
   --blue: #2878ed;
-  --blue-soft: #eaf2ff;
+  --blue-light: #eaf2ff;
+  --gold: #d8a84f;
   --ink: #17263d;
   --muted: #68778d;
   --line: #e2e9f2;
-  --surface: #ffffff;
-  --bg: #f3f6fb;
-  --gold: #d8a84f;
-  --shadow: 0 16px 45px rgba(20, 48, 86, .08);
+  --background: #f3f6fb;
+  --white: #ffffff;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0; background: radial-gradient(circle at 80% 0%, #e7f0ff 0, transparent 34%), var(--bg);
-  color: var(--ink); font-family: 'DM Sans', sans-serif; min-height: 100vh;
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 80% 0%, #e7f0ff, transparent 35%),
+    var(--background);
+  font-family: "DM Sans", sans-serif;
 }
-button, select { font: inherit; }
-button { cursor: pointer; }
+
+button,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
 .topbar {
-  max-width: 1180px; margin: 0 auto; padding: 22px 28px; display: flex;
-  align-items: center; justify-content: space-between;
+  max-width: 1240px;
+  margin: auto;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
 }
-.brand { display: flex; align-items: center; gap: 12px; color: var(--navy); text-decoration: none; }
-.brand-mark { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--navy); color: white; font-size: 25px; }
-.brand strong { display: block; font: 800 18px 'Manrope', sans-serif; letter-spacing: -.5px; }
-.brand small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
-.icon-button { width: 40px; height: 40px; border-radius: 13px; border: 1px solid var(--line); background: white; color: var(--navy); font-size: 20px; font-weight: 700; }
-.app-shell { max-width: 1180px; margin: 0 auto; padding: 8px 28px 36px; }
-.intro { padding: 28px 4px 30px; max-width: 720px; }
-.eyebrow, .section-kicker { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: 1.5px; }
-h1, h2, p { margin-top: 0; }
-h1 { font: 800 clamp(30px, 4vw, 46px)/1.12 'Manrope', sans-serif; letter-spacing: -1.8px; margin: 10px 0 12px; color: var(--navy); }
-.intro p { color: var(--muted); line-height: 1.7; max-width: 610px; font-size: 16px; margin-bottom: 20px; }
-.intro-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.primary-button, .secondary-button { border-radius: 13px; padding: 12px 17px; border: 1px solid transparent; font-weight: 700; transition: transform .16s, box-shadow .16s, background .16s; }
-.primary-button { color: white; background: var(--blue); box-shadow: 0 8px 20px rgba(40, 120, 237, .22); }
-.primary-button:hover { background: #1769dc; transform: translateY(-1px); }
-.secondary-button { background: white; color: var(--navy); border-color: var(--line); }
-.secondary-button:hover { background: #f8fbff; border-color: #c6d6ed; }
-.workspace { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 20px; align-items: stretch; }
-.rosary-card, .prayer-card, .mysteries-card { background: var(--surface); border: 1px solid rgba(210, 222, 238, .9); border-radius: 22px; box-shadow: var(--shadow); }
-.rosary-card { padding: 22px 22px 18px; }
-.card-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-h2 { font: 800 20px 'Manrope', sans-serif; letter-spacing: -.5px; margin: 5px 0 0; color: var(--navy); }
-.step-pill { background: var(--blue-soft); color: #1e60b9; font-size: 11px; font-weight: 700; padding: 7px 10px; border-radius: 999px; text-align: center; }
-.rosary-wrap { max-width: 410px; margin: 8px auto 0; }
-#rosarySvg { display: block; width: 100%; max-height: 460px; overflow: visible; }
-.bead { cursor: pointer; outline: none; }
-.bead circle { stroke: #7186a1; stroke-width: 1.8; fill: #d8e2ef; transition: fill .15s, r .15s, stroke .15s; }
-.bead.large circle { fill: #8fbaff; stroke: #2d6dc4; stroke-width: 2.2; }
-.bead.selected circle { fill: #2878ed; stroke: #0e438f; stroke-width: 3; }
-.bead:focus circle { stroke: #f0b941; stroke-width: 4; }
-.bead text { font-size: 8px; font-weight: 800; fill: #173d70; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
-.rosary-legend { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; color: var(--muted); font-size: 11px; margin-top: -5px; }
-.rosary-legend span { display: flex; align-items: center; gap: 6px; }
-.legend-dot { width: 9px; height: 9px; border-radius: 50%; background: #d8e2ef; border: 1px solid #9aabc1; display: inline-block; }
-.active-dot { background: var(--blue); border-color: #0e438f; }
-.rosary-tip { margin: 17px 0 0; text-align: center; color: var(--muted); font-size: 12px; }
-.prayer-card { padding: 22px; display: flex; flex-direction: column; min-height: 550px; }
-.prayer-card-top { display: flex; align-items: center; justify-content: space-between; }
-.prayer-number { background: #f1f5fa; color: var(--muted); border-radius: 9px; padding: 6px 9px; font-size: 11px; font-weight: 800; }
-.prayer-content { flex: 1; padding: 24px 4px 16px; }
-.prayer-symbol { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: var(--blue-soft); font-size: 23px; margin-bottom: 18px; }
-.prayer-content h2 { font-size: 25px; margin-bottom: 7px; }
-.prayer-subtitle { color: var(--blue); font-size: 13px; font-weight: 700; margin-bottom: 18px; }
-.prayer-text { color: #40516a; font-size: 15px; line-height: 1.8; white-space: normal; }
-.prayer-text p { margin-bottom: 12px; }
-.prayer-text .response { padding: 10px 13px; border-left: 3px solid #8db8f7; background: #f5f8fd; border-radius: 0 9px 9px 0; }
-.prayer-controls { display: flex; gap: 10px; border-top: 1px solid var(--line); padding-top: 17px; }
-.control-button { flex: 1; padding: 12px 10px; }
-button:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
-.mode-note { color: var(--muted); font-size: 11px; text-align: center; padding-top: 13px; }
-.mysteries-card { margin-top: 20px; padding: 22px 24px; display: grid; grid-template-columns: 1fr minmax(230px, .7fr); gap: 16px 28px; align-items: center; }
-.mysteries-card p { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-.select-wrap { display: grid; gap: 7px; font-size: 12px; color: var(--muted); font-weight: 700; }
-select { width: 100%; border: 1px solid var(--line); background: #fbfcfe; border-radius: 12px; padding: 12px; color: var(--ink); outline-color: var(--blue); }
-.mystery-list { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; padding: 0; margin: 0; list-style-position: inside; counter-reset: mystery; }
-.mystery-list li { list-style: none; background: #f5f8fd; border: 1px solid #e6edf7; border-radius: 12px; padding: 12px; font-size: 12px; color: #42536b; line-height: 1.5; }
-.mystery-list li::before { counter-increment: mystery; content: counter(mystery); display: grid; place-items: center; width: 22px; height: 22px; border-radius: 7px; background: #dceaff; color: #1f62b9; font-weight: 800; margin-bottom: 8px; }
-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; padding: 28px 0 0; color: var(--muted); font-size: 12px; }
-footer span { color: var(--gold); }
-footer small { width: 100%; text-align: center; font-size: 11px; }
-.help-dialog { width: min(500px, calc(100% - 28px)); border: 1px solid var(--line); border-radius: 20px; padding: 24px; color: var(--ink); box-shadow: 0 25px 80px rgba(15, 35, 66, .25); }
-.help-dialog::backdrop { background: rgba(11, 28, 53, .55); backdrop-filter: blur(3px); }
-.dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
-.dialog-head h2 { margin: 0; }
-.help-dialog li, .help-dialog p { color: #52627a; line-height: 1.7; margin-bottom: 10px; font-size: 14px; }
-@media (max-width: 800px) {
-  .app-shell { padding: 0 16px 28px; }
-  .topbar { padding: 17px 16px; }
-  .workspace { grid-template-columns: 1fr; }
-  .prayer-card { min-height: 440px; }
-  .rosary-card { padding: 18px 14px; }
-  .mystery-list { grid-template-columns: repeat(2, 1fr); }
-  .mysteries-card { grid-template-columns: 1fr; padding: 20px; }
-  .select-wrap { margin-top: 2px; }
+
+.logo {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: var(--navy);
+  color: white;
+  font-size: 27px;
 }
-@media (max-width: 420px) {
-  .brand strong { font-size: 16px; }
-  .intro { padding-top: 22px; }
-  .intro p { font-size: 14px; }
-  .card-heading { flex-direction: column; }
-  .step-pill { align-self: flex-start; }
-  .prayer-card { padding: 18px; }
-  .prayer-content h2 { font-size: 22px; }
-  .mystery-list { grid-template-columns: 1fr; }
-  .rosary-legend { gap: 10px; }
+
+.topbar h1 {
+  margin: 0;
+  color: var(--navy);
+  font: 800 19px "Manrope", sans-serif;
+}
+
+.topbar p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.help-button {
+  width: 41px;
+  height: 41px;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1240px;
+  margin: auto;
+  padding: 8px 28px 38px;
+}
+
+.intro {
+  max-width: 760px;
+  padding: 24px 4px 30px;
+}
+
+.eyebrow {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.intro h2 {
+  margin: 10px 0;
+  color: var(--navy);
+  font: 800 clamp(30px, 4vw, 46px)/1.15 "Manrope", sans-serif;
+  letter-spacing: -1.4px;
+}
+
+.intro p,
+.mysteries-panel > p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.primary,
+.secondary {
+  padding: 12px 17px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.primary {
+  background: var(--blue);
+  color: white;
+  box-shadow: 0 7px 18px #2878ed30;
+}
+
+.primary:hover {
+  background: #1769dc;
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: white;
+  border-color: var(--line);
+  color: var(--navy);
+}
+
+.secondary:hover {
+  background: #f7faff;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 23px;
+  box-shadow: 0 14px 40px #1430560d;
+}
+
+.rosary-panel,
+.prayer-panel {
+  padding: 24px;
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel h2 {
+  margin: 6px 0 0;
+  color: var(--navy);
+  font: 800 20px "Manrope", sans-serif;
+}
+
+.progress,
+.step-number {
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: var(--blue-light);
+  color: #1e60b9;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.rosary-container {
+  width: 100%;
+  max-width: 490px;
+  margin: 18px auto 0;
+}
+
+#rosary {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+#rosaryLines {
+  fill: none;
+  stroke: #8793a4;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bead {
+  cursor: pointer;
+  outline: none;
+}
+
+.bead circle {
+  fill: #ffffff;
+  stroke: #65758b;
+  stroke-width: 1.8;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.bead.small circle {
+  fill: #ffffff;
+  stroke: #596a80;
+  stroke-width: 1.8;
+}
+
+.bead.separator circle,
+.bead.large circle {
+  fill: #ffe34d;
+  stroke: #a18a26;
+  stroke-width: 2;
+}
+
+.bead.selected circle {
+  fill: var(--blue);
+  stroke: #123e7c;
+  stroke-width: 3;
+}
+
+.bead:focus circle {
+  stroke: var(--gold);
+  stroke-width: 3.5;
+}
+
+.bead text {
+  fill: #293548;
+  font-size: 8px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.bead.selected text {
+  fill: white;
+}
+
+#salveMarker {
+  cursor: pointer;
+  outline: none;
+}
+
+#salveMarker:focus circle {
+  stroke: var(--blue);
+  stroke-width: 4;
+}
+
+#cross {
+  cursor: pointer;
+  outline: none;
+}
+
+#cross:focus path {
+  stroke: var(--blue);
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #65758b;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.selected-dot {
+  background: var(--blue);
+  border-color: #123e7c;
+}
+
+.large-dot {
+  background: #ffe34d;
+  border-color: #a18a26;
+}
+
+.tip {
+  margin: 17px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.prayer-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 570px;
+}
+
+.prayer-content {
+  flex: 1;
+  padding: 25px 4px 22px;
+}
+
+.prayer-icon {
+  width: 51px;
+  height: 51px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  background: var(--blue-light);
+  font-size: 24px;
+}
+
+.prayer-content h2 {
+  margin-bottom: 8px;
+  font-size: 25px;
+}
+
+.prayer-subtitle {
+  margin: 0 0 20px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.prayer-text {
+  color: #40516a;
+  font-size: 15px;
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+.mystery-info {
+  margin-top: 16px;
+  padding: 13px;
+  border: 1px solid #f0dfb3;
+  border-radius: 12px;
+  background: #fff8e8;
+  color: #755519;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.controls button {
+  flex: 1;
+}
+
+.mode-message {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.mysteries-panel {
+  margin-top: 22px;
+  padding: 25px;
+}
+
+.mysteries-panel > p {
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+
+.mysteries-panel label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#mysterySelect {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fbfcfe;
+  color: var(--ink);
+}
+
+.mystery-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 11px;
+  padding: 0;
+  margin: 19px 0 0;
+  list-style: none;
+}
+
+.mystery-list li {
+  padding: 13px;
+  border: 1px solid #e6edf7;
+  border-radius: 13px;
+  background: #f5f8fd;
+  color: #42536b;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.mystery-list li::before {
+  content: attr(data-number);
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 9px;
+  border-radius: 8px;
+  background: #dceaff;
+  color: #1f62b9;
+  font-weight: 800;
+}
+
+footer {
+  padding: 28px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+dialog {
+  width: min(520px, calc(100% - 28px));
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--ink);
+  box-shadow: 0 25px 80px #0f234240;
+}
+
+dialog::backdrop {
+  background: #0b1c3588;
+  backdrop-filter: blur(3px);
+}
+
+.dialog-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dialog-heading h2 {
+  margin: 0;
+  color: var(--navy);
+}
+
+dialog li {
+  margin-bottom: 11px;
+  color: #52627a;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+@media (max-width: 850px) {
+  .container {
+    padding: 0 16px 28px;
+  }
+
+  .topbar {
+    padding: 17px 16px;
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prayer-panel {
+    min-height: 450px;
+  }
+
+  .mystery-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 460px) {
+  .rosary-panel,
+  .prayer-panel,
+  .mysteries-panel {
+    padding: 17px;
+  }
+
+  .panel-heading {
+    align-items: flex-start;
+  }
+
+  .progress {
+    max-width: 125px;
+  }
+
+  .legend {
+    gap: 9px;
+  }
+
+  .mystery-list {
+    grid-template-columns: 1fr;
+  }
 }
